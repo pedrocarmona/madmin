@@ -1,5 +1,9 @@
 module Madmin
   class Field
+    include ActionView::Helpers::TagHelper
+    include ActionView::Helpers::UrlHelper
+
+    class_attribute :renderer, default: :partial, instance_accessor: false
     attr_reader :attribute_name, :model, :options
 
     def self.field_type
@@ -35,6 +39,18 @@ module Madmin
 
     def required?
       model.validators_on(attribute_name).any? { |v| v.is_a? ActiveModel::Validations::PresenceValidator }
+    end
+
+    def show(record:)
+      value(record)
+    end
+
+    def index(record:)
+      value(record)
+    end
+
+    def form(record:, form:, resource:)
+      raise(NotImplementedError) # implement in subclass
     end
   end
 end

@@ -13,6 +13,18 @@ module Madmin
       def to_param
         {"#{attribute_name.to_s.singularize}_ids".to_sym => []}
       end
+
+      def show(record:)
+        value(record).map do |object|
+          content_tag(
+            :div,
+            link_to(
+              Madmin.resource_for(object).display_name(object),
+              Madmin.resource_for(object).show_path(object)
+            )
+          )
+        end.join("\n").html_safe
+      end
     end
   end
 end

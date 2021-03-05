@@ -35,7 +35,7 @@
 
           <% field = attribute[:field] %>
 
-          <td><%= render partial: field.to_partial_path("index"), locals: { field: field, record: record } %></td>
+          <td><%= render_field(field: field, partial: "index", record: record) %></td>
         <% end %>
 
         <td><%= link_to "View", resource.show_path(record) %></td>

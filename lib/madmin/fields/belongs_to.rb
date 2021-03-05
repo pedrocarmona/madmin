@@ -13,6 +13,16 @@ module Madmin
       def to_param
         "#{attribute_name}_id"
       end
+
+      def show(record:)
+        object = value(record)
+        return if object.nil?
+
+        link_to(
+          Madmin.resource_for(object).display_name(object),
+          Madmin.resource_for(object).show_path(object)
+        ).html_safe
+      end
     end
   end
 end

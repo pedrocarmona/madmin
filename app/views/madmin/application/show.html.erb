@@ -18,7 +18,7 @@
     </div>
 
     <div>
-      <%= render partial: field.to_partial_path("show"), locals: { field: field, record: @record } %>
+      <%= render_field(field: field, partial: "show", record: @record) %>
     </div>
   </div>
 <% end %>
